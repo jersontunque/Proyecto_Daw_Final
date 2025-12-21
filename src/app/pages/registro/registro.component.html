@@ -1,0 +1,26 @@
+<!-- src/app/pages/registro/registro.component.html -->
+<div class="registro-container">
+  <h2>Crear Cuenta</h2>
+  <form (ngSubmit)="registrar()" class="registro-form">
+    <select [(ngModel)]="tipoDocumento" name="tipoDocumento" required class="form-input">
+      <option value="" disabled selected>Tipo de documento</option>
+      <option value="DNI">DNI</option>
+      <option value="Pasaporte">Pasaporte</option>
+      <option value="Carnet Extranjeria">Carnet Extranjeria</option>
+    </select>
+
+    <input [(ngModel)]="documentoIdentidad" name="documentoIdentidad" placeholder="Número de documento" required class="form-input" />
+    <input [(ngModel)]="nombres" name="nombres" placeholder="Nombres" required class="form-input" />
+    <input [(ngModel)]="apellidos" name="apellidos" placeholder="Apellidos" required class="form-input" />
+    <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required class="form-input" />
+    <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required class="form-input" />
+    <input [(ngModel)]="telefono" name="telefono" placeholder="Teléfono" class="form-input" />
+    <input [(ngModel)]="fechaNacimiento" name="fechaNacimiento" type="date" placeholder="Fecha de nacimiento" class="form-input" />
+
+    <button type="submit" class="btn-registrar">Crear Cuenta</button>
+  </form>
+
+  <div class="login-link">
+    <p>¿Ya tienes cuenta? <a routerLink="/login">Iniciar sesión</a></p>
+  </div>
+</div>

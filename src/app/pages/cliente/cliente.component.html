@@ -1,0 +1,128 @@
+<div *ngIf="usuario; else cargando" class="perfil-container">
+  <h2>Perfil del Cliente</h2>
+
+  <p><strong>Nombres:</strong> {{ usuario.nombres }}</p>
+  <p><strong>Apellidos:</strong> {{ usuario.apellidos }}</p>
+  <p><strong>Email:</strong> {{ usuario.email }}</p>
+  <p><strong>Teléfono:</strong> {{ usuario.telefono }}</p>
+  <p><strong>Rol:</strong> {{ usuario.rol }}</p>
+  <p><strong>Documento:</strong> {{ usuario.tipoDocumento }} - {{ usuario.documentoIdentidad }}</p>
+  <p><strong>Fecha de Nacimiento:</strong> {{ usuario.fechaNacimiento }}</p>
+
+  <div class="botones-perfil">
+    <button class="btn-editar" (click)="abrirModal()">Editar Perfil</button>
+    <button class="btn-cerrar" (click)="logout()">Cerrar sesión</button>
+  </div>
+</div>
+
+<ng-template #cargando>
+  <p>Cargando perfil...</p>
+</ng-template>
+
+<!-- MODAL -->
+<div class="modal-backdrop" *ngIf="modalVisible">
+  <div class="modal">
+    <h3>Editar Perfil</h3>
+    <form (ngSubmit)="guardarCambios()">
+      <label>
+        Nombres:
+        <input type="text" [(ngModel)]="usuarioEdit.nombres" name="nombres" required>
+      </label>
+      <label>
+        Apellidos:
+        <input type="text" [(ngModel)]="usuarioEdit.apellidos" name="apellidos" required>
+      </label>
+      <label>
+        Teléfono:
+        <input type="text" [(ngModel)]="usuarioEdit.telefono" name="telefono" required>
+      </label>
+      <label>
+        Fecha de Nacimiento:
+        <input type="date" [(ngModel)]="usuarioEdit.fechaNacimiento" name="fechaNacimiento" required>
+      </label>
+
+      <div class="botones-modal">
+        <button type="button" (click)="cerrarModal()">Cancelar</button>
+        <button type="submit">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Estilos simples, puedes ponerlos en cliente.component.css -->
+<style>
+.perfil-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.botones-perfil button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
+.btn-editar {
+  background-color: #007bff;
+  color: white;
+}
+.btn-cerrar {
+  background-color: #dc3545;
+  color: white;
+}
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+}
+.modal h3 {
+  margin-top: 0;
+}
+.modal form label {
+  display: block;
+  margin-bottom: 10px;
+}
+.modal form input {
+  width: 100%;
+  padding: 6px;
+  margin-top: 4px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.botones-modal {
+  text-align: right;
+  margin-top: 15px;
+}
+.botones-modal button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+.botones-modal button:first-child {
+  background: #6c757d;
+  color: white;
+}
+.botones-modal button:last-child {
+  background: #28a745;
+  color: white;
+}
+</style>
