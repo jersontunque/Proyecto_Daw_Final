@@ -1,0 +1,76 @@
+/* Estilo de la tarjeta principal */
+.card {
+  border: none;
+  border-radius: 15px; /* Bordes más redondeados */
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Header con gradiente para darle un toque premium */
+.card-header {
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+  border-bottom: none;
+}
+
+/* Inputs y Selects más amigables */
+.form-control, 
+.form-select {
+  border-radius: 8px;
+  padding: 12px 15px; /* Más espacio interno para facilitar el clic */
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus, 
+.form-select:focus {
+  background-color: #fff;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1); /* Sombra suave al enfocar */
+}
+
+/* --- Estilos para los botones de Horarios --- */
+
+/* Base del botón de horario */
+.btn-outline-primary {
+  min-width: 90px;
+  border-radius: 8px;
+  border-width: 2px; /* Borde un poco más grueso */
+  padding: 8px 12px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover suave */
+.btn-outline-primary:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+  border-color: #0d6efd;
+  transform: translateY(-2px); /* Efecto de elevación */
+}
+
+/* Cuando el horario está SELECCIONADO */
+.btn-check:checked + .btn-outline-primary {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.4); /* Sombra difuminada */
+  transform: scale(1.05); /* Ligeramente más grande */
+  font-weight: bold;
+}
+
+/* Labels de las preguntas (1. ¿Qué servicio...?) */
+.form-label.fw-bold {
+  color: #495057;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .btn-outline-primary {
+    flex: 1 0 30%; /* En celular, que ocupen un tercio del ancho disponible */
+    text-align: center;
+  }
+}

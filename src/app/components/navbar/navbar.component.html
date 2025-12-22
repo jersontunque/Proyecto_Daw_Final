@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold fs-3" routerLink="/home">
+      <i class="bi bi-eye-fill me-2"></i>VISUM
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="bi bi-house-fill me-1"></i>Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/catalogo" routerLinkActive="active">
+            <i class="bi bi-grid-fill me-1"></i>Catálogo
+          </a>
+        </li>
+      </ul>
+
+      <!-- Búsqueda -->
+      <form class="d-flex me-3" (ngSubmit)="onSearch()">
+        <input 
+          class="form-control me-2" 
+          type="search" 
+          placeholder="Buscar productos..." 
+          [(ngModel)]="searchTerm"
+          name="search">
+        <button class="btn btn-outline-light" type="submit">
+          <i class="bi bi-search"></i>
+        </button>
+      </form>
+
+      <!-- Carrito -->
+      <a routerLink="/carrito" class="btn btn-outline-light position-relative me-2">
+        <i class="bi bi-cart3 fs-5"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="totalItems > 0">
+          {{totalItems}}
+        </span>
+      </a>
+
+      <!-- Perfil -->
+      <a routerLink="/perfil" class="btn btn-outline-light me-2">
+        <i class="bi bi-person-circle fs-5"></i>
+      </a>
+
+      <!-- Logout -->
+      <button class="btn btn-outline-light text-danger" (click)="logout()">
+        <i class="bi bi-door-closed-fill fs-5"></i>
+      </button>
+    </div>
+  </div>
+</nav>

@@ -7,12 +7,19 @@ export const tokenInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
-  const authService = inject(AuthService) as AuthService;
-  const token = authService.obtenerToken(); // Devuelve token de localStorage
+
+  if (req.url.includes('/auth/login')) {
+    return next(req);
+  }
+
+  const authService = inject(AuthService);
+  const token = authService.obtenerToken();
 
   if (token) {
     req = req.clone({
-      setHeaders: { Authorization: `Bearer ${token}` }
+      setHeaders: {
+        Authorization: `Bearer ${token}`
+      }
     });
   }
 

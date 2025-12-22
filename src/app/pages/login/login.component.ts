@@ -20,7 +20,7 @@ export class LoginComponent {
   login() {
     const request: LoginRequest = { email: this.email, password: this.password };
     this.loginService.login(request).subscribe({
-      next: () => this.router.navigate(['/perfil']),
+      next: () => this.router.navigate(['/home']),
       error: err => console.error('Error login', err)
     });
   }

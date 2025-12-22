@@ -1,0 +1,76 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow border-0">
+        <div class="card-header bg-primary text-white p-4">
+          <h3 class="mb-0"><i class="bi bi-calendar-plus me-2"></i>Agendar Nueva Cita</h3>
+        </div>
+        <div class="card-body p-4">
+          
+          <form [formGroup]="citaForm" (ngSubmit)="onSubmit()">
+            
+            <div class="mb-4">
+              <label class="form-label fw-bold">1. ¿Qué servicio necesitas?</label>
+              <select class="form-select form-select-lg" formControlName="servicio">
+                <option value="" disabled selected>Selecciona un servicio</option>
+                <option *ngFor="let serv of servicios" [value]="serv.idTipoServicio">
+                  {{serv.nombreServicio}} - S/ {{serv.precio | number:'1.2-2'}} ({{serv.duracionMinutos}} min)
+                </option>
+              </select>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <label class="form-label fw-bold">2. Elige una Sede</label>
+                <select class="form-select" formControlName="sucursal">
+                  <option value="" disabled selected>Selecciona sede</option>
+                  <option *ngFor="let suc of sucursales" [value]="suc.idSucursal">
+                    {{suc.nombreSucursal}} - {{suc.distrito}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold">3. Fecha deseada</label>
+                <input type="date" class="form-control" formControlName="fecha" [min]="minDate">
+              </div>
+            </div>
+
+            <div class="mb-4" *ngIf="citaForm.get('sucursal')?.valid && citaForm.get('fecha')?.valid">
+              <label class="form-label fw-bold">4. Horarios Disponibles</label>
+              
+              <div *ngIf="loadingHorarios" class="text-primary">
+                <div class="spinner-border spinner-border-sm me-2"></div> Buscando horarios...
+              </div>
+
+              <div *ngIf="!loadingHorarios && horariosDisponibles.length === 0" class="alert alert-warning">
+                No hay horarios disponibles para esta fecha. Intenta otro día.
+              </div>
+
+              <div class="d-flex flex-wrap gap-2" *ngIf="!loadingHorarios">
+                <div *ngFor="let hora of horariosDisponibles">
+                  <input type="radio" class="btn-check" [value]="hora" formControlName="hora" [id]="'hora'+hora">
+                  <label class="btn btn-outline-primary" [for]="'hora'+hora">
+                    {{hora.substring(0,5)}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Notas adicionales (Opcional)</label>
+              <textarea class="form-control" rows="2" formControlName="notas"></textarea>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-lg" [disabled]="citaForm.invalid">
+                Confirmar Reserva
+              </button>
+              <a routerLink="/mis-citas" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

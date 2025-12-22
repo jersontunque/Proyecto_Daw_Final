@@ -1,0 +1,7 @@
+.form-check-label {
+  cursor: pointer;
+}
+
+.form-check-input:checked + label {
+  font-weight: bold;
+}

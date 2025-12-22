@@ -1,0 +1,26 @@
+.imagen-principal {
+  height: 500px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+}
+
+.miniatura {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 80px;
+  object-fit: cover;
+}
+
+.miniatura:hover {
+  transform: scale(1.05);
+  border-color: var(--bs-primary) !important;
+}
+
+.miniatura.active {
+  border: 3px solid var(--bs-primary);
+}
+
+.input-group input[type="number"]::-webkit-inner-spin-button,
+.input-group input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}

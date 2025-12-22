@@ -1,0 +1,166 @@
+<div class="container mt-4 mb-5" *ngIf="!loading && producto">
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
+      <li class="breadcrumb-item"><a routerLink="/catalogo">Catálogo</a></li>
+      <li class="breadcrumb-item active">{{producto.nombreProducto}}</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <!-- Galería de Imágenes -->
+    <div class="col-lg-6 mb-4">
+      <div class="card shadow-sm">
+        <img [src]="imagenActual" class="card-img-top imagen-principal" [alt]="producto.nombreProducto">
+        
+        <!-- Miniaturas -->
+        <div class="card-body">
+          <div class="row g-2">
+            <div class="col-3" *ngFor="let imagen of producto.imagenes">
+              <img [src]="imagen.urlImagen" 
+                   class="img-thumbnail miniatura" 
+                   [class.active]="imagenActual === imagen.urlImagen"
+                   (click)="cambiarImagen(imagen.urlImagen)"
+                   [alt]="producto.nombreProducto">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del Producto -->
+    <div class="col-lg-6">
+      <div class="mb-3">
+        <span class="badge bg-primary">{{producto.nombreCategoria}}</span>
+        <span class="badge bg-secondary ms-2">{{producto.nombreMarca}}</span>
+        <span class="badge bg-danger ms-2" *ngIf="producto.enPromocion">
+          ¡Oferta! -{{getDescuentoPorcentaje()}}%
+        </span>
+        <span class="badge bg-success ms-2" *ngIf="producto.esNuevo">Nuevo</span>
+      </div>
+
+      <h1 class="h2 mb-3">{{producto.nombreProducto}}</h1>
+
+      <!-- Precio -->
+      <div class="precio-section mb-4">
+        <div class="d-flex align-items-center gap-3">
+          <span class="precio-actual display-5 fw-bold text-primary">
+            S/ {{getPrecioFinal().toFixed(2)}}
+          </span>
+          <span class="precio-antes fs-4 text-decoration-line-through text-muted" 
+                *ngIf="producto.precioDescuento">
+            S/ {{producto.precioUnitario.toFixed(2)}}
+          </span>
+        </div>
+        <p class="text-success fw-bold" *ngIf="producto.enPromocion">
+          ¡Ahorras S/ {{(producto.precioUnitario - getPrecioFinal()).toFixed(2)}}!
+        </p>
+      </div>
+
+      <!-- Descripción -->
+      <div class="mb-4">
+        <h5>Descripción</h5>
+        <p class="text-muted">{{producto.descripcion}}</p>
+      </div>
+
+      <!-- Características -->
+      <div class="mb-4">
+        <h5>Características</h5>
+        <ul class="list-unstyled">
+          <li><strong>Material:</strong> {{producto.material || 'No especificado'}}</li>
+          <li><strong>Color:</strong> {{producto.color || 'No especificado'}}</li>
+          <li><strong>Forma:</strong> {{producto.forma || 'No especificado'}}</li>
+          <li><strong>Género:</strong> {{producto.genero || 'Unisex'}}</li>
+        </ul>
+      </div>
+
+      <!-- Stock -->
+      <div class="alert" [class.alert-success]="producto.stock > 10" 
+           [class.alert-warning]="producto.stock <= 10 && producto.stock > 0"
+           [class.alert-danger]="producto.stock === 0">
+        <i class="bi" [class.bi-check-circle]="producto.stock > 0" 
+           [class.bi-x-circle]="producto.stock === 0"></i>
+        <strong *ngIf="producto.stock > 10">Disponible</strong>
+        <strong *ngIf="producto.stock <= 10 && producto.stock > 0">
+          ¡Solo quedan {{producto.stock}} unidades!
+        </strong>
+        <strong *ngIf="producto.stock === 0">Agotado</strong>
+      </div>
+
+      <!-- Cantidad y Agregar al Carrito -->
+      <div class="card bg-light mb-4" *ngIf="producto.stock > 0">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-md-4 mb-3 mb-md-0">
+              <label class="form-label fw-bold">Cantidad</label>
+              <div class="input-group">
+                <button class="btn btn-outline-secondary" type="button" 
+                        (click)="decrementarCantidad()" [disabled]="cantidad <= 1">
+                  <i class="bi bi-dash"></i>
+                </button>
+                <input type="number" class="form-control text-center" 
+                       [(ngModel)]="cantidad" [max]="producto.stock" min="1" readonly>
+                <button class="btn btn-outline-secondary" type="button" 
+                        (click)="incrementarCantidad()" [disabled]="cantidad >= producto.stock">
+                  <i class="bi bi-plus"></i>
+                </button>
+              </div>
+            </div>
+            
+            <div class="col-md-8">
+              <p class="mb-2">
+                <strong>Subtotal:</strong> 
+                <span class="fs-4 text-primary">S/ {{getSubtotal().toFixed(2)}}</span>
+              </p>
+              <button class="btn btn-primary btn-lg w-100" 
+                      (click)="agregarAlCarrito()" 
+                      [disabled]="agregandoCarrito">
+                <i class="bi bi-cart-plus me-2"></i>
+                <span *ngIf="!agregandoCarrito">Agregar al Carrito</span>
+                <span *ngIf="agregandoCarrito">Agregando...</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-outline-primary" routerLink="/carrito">
+          <i class="bi bi-cart3 me-2"></i>Ver Carrito
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Productos Relacionados -->
+  <section class="mt-5" *ngIf="productosRelacionados.length > 0">
+    <h3 class="mb-4">Productos Relacionados</h3>
+    <div class="row g-4">
+      <div class="col-6 col-md-3" *ngFor="let rel of productosRelacionados">
+        <div class="card h-100 shadow-sm">
+          <img [src]="rel.imagenPrincipal || 'https://via.placeholder.com/300x200'" 
+               class="card-img-top" [alt]="rel.nombreProducto"
+               style="height: 150px; object-fit: cover;">
+          <div class="card-body">
+            <p class="text-muted small mb-1">{{rel.nombreMarca}}</p>
+            <h6 class="card-title small">{{rel.nombreProducto}}</h6>
+            <p class="fw-bold text-primary mb-2">
+              S/ {{getPrecioFinalRelacionado(rel).toFixed(2)}}
+            </p>
+            <a [routerLink]="['/producto', rel.idProducto]" class="btn btn-sm btn-outline-primary w-100">
+              Ver
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading" class="container text-center py-5">
+  <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>

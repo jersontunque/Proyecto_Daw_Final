@@ -1,0 +1,30 @@
+<div class="editar-cliente-container">
+  <h2>Editar Perfil</h2>
+
+  <form (ngSubmit)="guardarCambios()">
+    <label>
+      Nombres:
+      <input type="text" [(ngModel)]="usuarioEdit.nombres" name="nombres" required>
+    </label>
+
+    <label>
+      Apellidos:
+      <input type="text" [(ngModel)]="usuarioEdit.apellidos" name="apellidos" required>
+    </label>
+
+    <label>
+      Teléfono:
+      <input type="text" [(ngModel)]="usuarioEdit.telefono" name="telefono" required>
+    </label>
+
+    <label>
+      Fecha de Nacimiento:
+      <input type="date" [(ngModel)]="usuarioEdit.fechaNacimiento" name="fechaNacimiento" required>
+    </label>
+
+    <div class="botones-editar">
+      <button type="button" (click)="cancelar()">Cancelar</button>
+      <button type="submit">Guardar Cambios</button>
+    </div>
+  </form>
+</div>

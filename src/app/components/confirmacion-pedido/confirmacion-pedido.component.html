@@ -1,0 +1,146 @@
+<div class="container mt-5 mb-5">
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-success"></div>
+  </div>
+
+  <!-- Confirmación -->
+  <div *ngIf="!loading && pedido" class="row justify-content-center">
+    <div class="col-lg-8">
+      <!-- Header Success -->
+      <div class="text-center mb-5">
+        <div class="success-checkmark mb-4">
+          <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+        </div>
+        <h1 class="text-success mb-3">¡Pedido Confirmado!</h1>
+        <p class="lead">Gracias por tu compra. Tu pedido ha sido procesado exitosamente.</p>
+      </div>
+
+      <!-- Información del Pedido -->
+      <div class="card shadow-lg mb-4">
+        <div class="card-header bg-success text-white">
+          <h4 class="mb-0">Detalles del Pedido</h4>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <p class="mb-1"><strong>Número de Pedido:</strong></p>
+              <p class="text-primary fs-5">{{pedido.numeroPedido}}</p>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-1"><strong>Fecha:</strong></p>
+              <p>{{pedido.fechaPedido | date:'dd/MM/yyyy HH:mm'}}</p>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-1"><strong>Estado:</strong></p>
+              <span class="badge bg-success">{{pedido.estadoPedido}}</span>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-1"><strong>Estado de Pago:</strong></p>
+              <span class="badge bg-info">{{pedido.estadoPago}}</span>
+            </div>
+          </div>
+
+          <!-- Productos -->
+          <h5 class="mt-4 mb-3">Productos</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Producto</th>
+                  <th class="text-center">Cantidad</th>
+                  <th class="text-end">Precio</th>
+                  <th class="text-end">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let prod of pedido.productos">
+                  <td>
+                    <strong>{{prod.nombreProducto}}</strong>
+                    <br>
+                    <small class="text-muted">{{prod.nombreMarca}}</small>
+                  </td>
+                  <td class="text-center">{{prod.cantidad}}</td>
+                  <td class="text-end">S/ {{prod.precioUnitario.toFixed(2)}}</td>
+                  <td class="text-end">S/ {{prod.subtotal.toFixed(2)}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Totales -->
+          <div class="row justify-content-end">
+            <div class="col-md-6">
+              <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal:</span>
+                <span>S/ {{pedido.subtotal.toFixed(2)}}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <span>Envío:</span>
+                <span>S/ {{pedido.costoEnvio.toFixed(2)}}</span>
+              </div>
+              <div class="d-flex justify-content-between mb-2" *ngIf="pedido.descuento > 0">
+                <span>Descuento:</span>
+                <span class="text-danger">- S/ {{pedido.descuento.toFixed(2)}}</span>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-between">
+                <strong class="fs-4">Total:</strong>
+                <strong class="fs-4 text-success">S/ {{pedido.total.toFixed(2)}}</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dirección de Envío -->
+          <div class="mt-4" *ngIf="pedido.direccionEnvio">
+            <h5 class="mb-3">Dirección de Envío</h5>
+            <p class="mb-1"><strong>{{pedido.direccionEnvio.nombreDestinatario}}</strong></p>
+            <p class="mb-1">{{pedido.direccionEnvio.direccionLinea1}}</p>
+            <p class="mb-1" *ngIf="pedido.direccionEnvio.direccionLinea2">
+              {{pedido.direccionEnvio.direccionLinea2}}
+            </p>
+            <p class="mb-1">
+              {{pedido.direccionEnvio.distrito}}, {{pedido.direccionEnvio.provincia}}, 
+              {{pedido.direccionEnvio.departamento}}
+            </p>
+            <p class="mb-1">Tel: {{pedido.direccionEnvio.telefonoDestinatario}}</p>
+            <p class="text-muted" *ngIf="pedido.direccionEnvio.referencia">
+              <small>Ref: {{pedido.direccionEnvio.referencia}}</small>
+            </p>
+          </div>
+
+          <!-- Método de Pago -->
+          <div class="mt-4">
+            <h5 class="mb-3">Método de Pago</h5>
+            <p class="mb-0"><strong>{{pedido.metodoPago.nombreMetodo}}</strong></p>
+            <p class="text-muted small">{{pedido.metodoPago.descripcion}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones -->
+      <div class="text-center">
+        <button class="btn btn-outline-primary btn-lg me-2" (click)="imprimirPedido()">
+          <i class="bi bi-printer me-2"></i>Imprimir
+        </button>
+        <a routerLink="/home" class="btn btn-primary btn-lg">
+          <i class="bi bi-house me-2"></i>Volver al Inicio
+        </a>
+      </div>
+
+      <!-- Info adicional -->
+      <div class="alert alert-info mt-4">
+        <i class="bi bi-info-circle me-2"></i>
+        <strong>Importante:</strong> Recibirás un correo electrónico con la confirmación 
+        de tu pedido y el seguimiento del envío.
+      </div>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="!loading && !pedido" class="text-center py-5">
+    <i class="bi bi-x-circle text-danger" style="font-size: 5rem;"></i>
+    <h3 class="mt-3">Pedido no encontrado</h3>
+    <a routerLink="/home" class="btn btn-primary mt-3">Volver al Inicio</a>
+  </div>
+</div>
