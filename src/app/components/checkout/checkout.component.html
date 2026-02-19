@@ -65,32 +65,38 @@
 
 
           <div *ngIf="mostrarFormDireccion">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">Nombre completo *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.nombreDestinatario" 
-                       name="nombreDestinatario" required>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Teléfono *</label>
-                <input type="tel" class="form-control" [(ngModel)]="nuevaDireccion.telefonoDestinatario" 
-                       name="telefonoDestinatario" required>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Departamento *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.departamento" 
-                       name="departamento" required>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Provincia *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.provincia" 
-                       name="provincia" required>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label">Distrito *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.distrito" 
-                       name="distrito" required>
-              </div>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">Nombre completo *</label>
+      <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.nombreDestinatario" 
+             name="nombreDestinatario" required
+             (keypress)="soloLetras($event)">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Teléfono *</label>
+      <input type="tel" class="form-control" [(ngModel)]="nuevaDireccion.telefonoDestinatario" 
+             name="telefonoDestinatario" required
+             maxlength="9"
+             (keypress)="soloNumeros($event)">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Departamento *</label>
+      <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.departamento" 
+             name="departamento" required
+             (keypress)="soloLetras($event)">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Provincia *</label>
+      <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.provincia" 
+             name="provincia" required
+             (keypress)="soloLetras($event)">
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Distrito *</label>
+      <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.distrito" 
+             name="distrito" required
+             (keypress)="soloLetras($event)">
+    </div>
               <div class="col-12">
                 <label class="form-label">Dirección *</label>
                 <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.direccionLinea1" 

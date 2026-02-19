@@ -159,4 +159,14 @@ export class CheckoutComponent implements OnInit {
       }
     });
   }
+
+  soloLetras(event: KeyboardEvent): boolean {
+  const pattern = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
+  return pattern.test(event.key);
+}
+
+soloNumeros(event: KeyboardEvent): boolean {
+  const pattern = /^[0-9]$/;
+  return pattern.test(event.key);
+}
 }
