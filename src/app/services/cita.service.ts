@@ -14,27 +14,21 @@ export class CitaService {
 
   constructor(private http: HttpClient) {}
 
-  // =========================
-  //        SUCURSALES
-  // =========================
+
   obtenerSucursales(): Observable<Sucursal[]> {
     return this.http.get<Sucursal[]>(
       `${this.baseUrl}/sucursales`
     );
   }
 
-  // =========================
-  //      TIPOS SERVICIO
-  // =========================
+
   obtenerTiposServicio(): Observable<TipoServicio[]> {
     return this.http.get<TipoServicio[]>(
       `${this.baseUrl}/tipos-servicio`
     );
   }
 
-  // =========================
-  //           CITAS
-  // =========================
+
   crearCita(request: CrearCitaRequest): Observable<any> {
     return this.http.post(
       `${this.baseUrl}/citas`,

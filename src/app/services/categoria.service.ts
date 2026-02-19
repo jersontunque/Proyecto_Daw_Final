@@ -10,23 +10,17 @@ export class CategoriaService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * Obtener todas las categorías activas
-   */
+
   obtenerActivas(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/activas`);
   }
 
-  /**
-   * Obtener categorías con productos
-   */
+
   obtenerConProductos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/con-productos`);
   }
 
-  /**
-   * Obtener categoría por ID
-   */
+
   obtenerPorId(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }

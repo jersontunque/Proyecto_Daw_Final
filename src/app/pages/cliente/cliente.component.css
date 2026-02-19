@@ -1,4 +1,4 @@
-/* Contenedor de perfil */
+
 .perfil-container {
   padding: 20px;
   max-width: 600px;
@@ -9,7 +9,7 @@
   text-align: left;
 }
 
-/* Botones del perfil */
+
 .botones-perfil {
   margin-top: 15px;
 }
@@ -32,7 +32,7 @@
   color: white;
 }
 
-/* Modal y backdrop */
+
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -43,7 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000; /* Mayor que navbar */
+  z-index: 2000; 
 }
 
 .modal {
@@ -53,7 +53,7 @@
   width: 400px;
   max-width: 90%;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
-  z-index: 2001; /* Mayor que navbar */
+  z-index: 2001; 
 }
 
 .modal h3 {
@@ -73,7 +73,7 @@
   border: 1px solid #ccc;
 }
 
-/* Botones dentro del modal */
+
 .botones-modal {
   text-align: right;
   margin-top: 15px;

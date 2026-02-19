@@ -8,5 +8,5 @@ export interface Sucursal {
     horarioAtencion: string;
     latitud?: number;
     longitud?: number;
-    imagenUrl?: string; // Opcional si decides agregar fotos a las sucursales
+    imagenUrl?: string; 
 }

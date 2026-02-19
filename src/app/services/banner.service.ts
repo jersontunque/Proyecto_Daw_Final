@@ -10,16 +10,12 @@ export class BannerService {
 
   constructor(private http: HttpClient) { }
 
-  /**
-   * Obtener banners activos
-   */
+
   obtenerActivos(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/activos`);
   }
 
-  /**
-   * Obtener banner por ID
-   */
+
   obtenerPorId(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }

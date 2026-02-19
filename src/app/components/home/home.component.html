@@ -1,4 +1,4 @@
-<!-- Carrusel de Banners -->
+
 <div id="carouselBanners" class="carousel slide mb-5" data-bs-ride="carousel" *ngIf="banners.length > 0">
   <div class="carousel-indicators">
     <button *ngFor="let banner of banners; let i = index" 
@@ -35,7 +35,7 @@
 </div>
 
 <div class="container">
-  <!-- Categorías -->
+
   <section class="mb-5">
     <h2 class="text-center mb-4">Explora por Categorías</h2>
     <div class="row g-3">
@@ -55,7 +55,7 @@
     </div>
   </section>
 
-  <!-- Productos Destacados -->
+
   <section class="mb-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2>Productos Destacados</h2>
@@ -73,7 +73,7 @@
     <div class="row g-4" *ngIf="!loading">
       <div class="col-6 col-md-4 col-lg-3" *ngFor="let producto of productosDestacados">
         <div class="card producto-card h-100 shadow-sm">
-          <!-- Badges -->
+
           <div class="badges-container">
             <span class="badge bg-danger" *ngIf="producto.enPromocion">
               -{{getDescuentoPorcentaje(producto)}}%
@@ -81,7 +81,7 @@
             <span class="badge bg-success" *ngIf="producto.esNuevo">Nuevo</span>
           </div>
 
-          <!-- Imagen -->
+
           <img 
             [src]="producto.imagenPrincipal || 'https://via.placeholder.com/300x200?text=Sin+Imagen'" 
             class="card-img-top" 
@@ -113,7 +113,7 @@
     </div>
   </section>
 
-  <!-- CTA Section -->
+
   <section class="cta-section text-center py-5 bg-light rounded mb-5">
     <h2 class="mb-3">¿Buscas algo específico?</h2>
     <p class="text-muted mb-4">Explora nuestro catálogo completo con más de 100 productos</p>

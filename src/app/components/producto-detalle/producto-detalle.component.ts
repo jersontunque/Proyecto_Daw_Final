@@ -20,7 +20,7 @@ export class ProductoDetalleComponent implements OnInit {
   cantidad: number = 1;
   loading = true;
   agregandoCarrito = false;
-  idUsuario = 1; // Temporal
+  idUsuario = 1; 
 
   constructor(
     private route: ActivatedRoute,

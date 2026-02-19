@@ -12,7 +12,7 @@ import { Cita } from '../../../model/cita';
 })
 export class MisCitasComponent implements OnInit {
   citas: Cita[] = [];
-  userId: number = 1; // El mismo ID de prueba
+  userId: number = 1; 
 
   constructor(private citaService: CitaService) {}
 
@@ -30,7 +30,7 @@ export class MisCitasComponent implements OnInit {
     if(confirm('¿Estás seguro de cancelar esta cita?')) {
       this.citaService.cancelarCita(idCita, this.userId).subscribe({
         next: () => {
-          this.cargarCitas(); // Recargar lista
+          this.cargarCitas(); 
         },
         error: (err) => alert('Error al cancelar: ' + err.error?.message)
       });

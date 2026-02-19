@@ -22,7 +22,7 @@
         </li>
       </ul>
 
-      <!-- Búsqueda -->
+
       <form class="d-flex me-3" (ngSubmit)="onSearch()">
         <input 
           class="form-control me-2" 
@@ -35,7 +35,7 @@
         </button>
       </form>
 
-      <!-- Carrito -->
+
       <a routerLink="/carrito" class="btn btn-outline-light position-relative me-2">
         <i class="bi bi-cart3 fs-5"></i>
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" *ngIf="totalItems > 0">
@@ -43,12 +43,12 @@
         </span>
       </a>
 
-      <!-- Perfil -->
+
       <a routerLink="/perfil" class="btn btn-outline-light me-2">
         <i class="bi bi-person-circle fs-5"></i>
       </a>
 
-      <!-- Logout -->
+
       <button class="btn btn-outline-light text-danger" (click)="logout()">
         <i class="bi bi-door-closed-fill fs-5"></i>
       </button>

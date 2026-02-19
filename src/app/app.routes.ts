@@ -12,14 +12,14 @@ import { AgendarCitaComponent } from './components/citas/agendar-cita/agendar-ci
 
 
 export const routes: Routes = [
-  // Rutas clásicas
+
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'perfil', component: ClienteComponent },
   { path: 'perfil/editar', component: EditarClienteComponent },
 
-  // Rutas con carga perezosa
+
   {
     path: 'home',
     loadComponent: () =>

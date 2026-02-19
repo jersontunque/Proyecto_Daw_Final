@@ -22,7 +22,7 @@ export class EditarClienteComponent implements OnInit {
     if (datos) {
       this.usuarioEdit = JSON.parse(datos);
     } else {
-      // si no hay datos, volver al perfil
+
       this.router.navigate(['/perfil']);
     }
   }
@@ -35,15 +35,24 @@ export class EditarClienteComponent implements OnInit {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: () => {
-        // actualizar datos en localStorage para mostrar en perfil
+    
         localStorage.setItem('usuario', JSON.stringify(this.usuarioEdit));
-        this.router.navigate(['/perfil']); // volver al perfil
+        this.router.navigate(['/perfil']); 
       },
       error: () => alert('No se pudo actualizar el perfil')
     });
   }
 
   cancelar() {
-    this.router.navigate(['/perfil']); // volver al perfil sin guardar
+    this.router.navigate(['/perfil']); 
   }
+  soloLetras(event: KeyboardEvent): boolean {
+  const pattern = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]$/;
+  return pattern.test(event.key);
+}
+
+soloNumeros(event: KeyboardEvent): boolean {
+  const pattern = /^[0-9]$/;
+  return pattern.test(event.key);
+}
 }

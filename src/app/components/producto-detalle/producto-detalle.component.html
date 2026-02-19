@@ -1,5 +1,5 @@
 <div class="container mt-4 mb-5" *ngIf="!loading && producto">
-  <!-- Breadcrumb -->
+
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/">Inicio</a></li>
@@ -9,12 +9,11 @@
   </nav>
 
   <div class="row">
-    <!-- Galería de Imágenes -->
+
     <div class="col-lg-6 mb-4">
       <div class="card shadow-sm">
         <img [src]="imagenActual" class="card-img-top imagen-principal" [alt]="producto.nombreProducto">
         
-        <!-- Miniaturas -->
         <div class="card-body">
           <div class="row g-2">
             <div class="col-3" *ngFor="let imagen of producto.imagenes">
@@ -29,7 +28,7 @@
       </div>
     </div>
 
-    <!-- Información del Producto -->
+
     <div class="col-lg-6">
       <div class="mb-3">
         <span class="badge bg-primary">{{producto.nombreCategoria}}</span>
@@ -42,7 +41,7 @@
 
       <h1 class="h2 mb-3">{{producto.nombreProducto}}</h1>
 
-      <!-- Precio -->
+
       <div class="precio-section mb-4">
         <div class="d-flex align-items-center gap-3">
           <span class="precio-actual display-5 fw-bold text-primary">
@@ -58,13 +57,13 @@
         </p>
       </div>
 
-      <!-- Descripción -->
+
       <div class="mb-4">
         <h5>Descripción</h5>
         <p class="text-muted">{{producto.descripcion}}</p>
       </div>
 
-      <!-- Características -->
+
       <div class="mb-4">
         <h5>Características</h5>
         <ul class="list-unstyled">
@@ -75,7 +74,7 @@
         </ul>
       </div>
 
-      <!-- Stock -->
+
       <div class="alert" [class.alert-success]="producto.stock > 10" 
            [class.alert-warning]="producto.stock <= 10 && producto.stock > 0"
            [class.alert-danger]="producto.stock === 0">
@@ -88,7 +87,7 @@
         <strong *ngIf="producto.stock === 0">Agotado</strong>
       </div>
 
-      <!-- Cantidad y Agregar al Carrito -->
+
       <div class="card bg-light mb-4" *ngIf="producto.stock > 0">
         <div class="card-body">
           <div class="row align-items-center">
@@ -133,7 +132,7 @@
     </div>
   </div>
 
-  <!-- Productos Relacionados -->
+
   <section class="mt-5" *ngIf="productosRelacionados.length > 0">
     <h3 class="mb-4">Productos Relacionados</h3>
     <div class="row g-4">
@@ -158,7 +157,7 @@
   </section>
 </div>
 
-<!-- Loading -->
+
 <div *ngIf="loading" class="container text-center py-5">
   <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;">
     <span class="visually-hidden">Cargando...</span>

@@ -20,7 +20,7 @@ export class CheckoutComponent implements OnInit {
   direcciones: DireccionEnvio[] = [];
   metodosPago: MetodoPago[] = [];
   
-  idUsuario = 1; // Temporal
+  idUsuario = 1; 
   tipoEntrega: string = 'ENVIO';
   idDireccionSeleccionada: number | null = null;
   idMetodoPagoSeleccionado: number | null = null;
@@ -65,7 +65,7 @@ export class CheckoutComponent implements OnInit {
   cargarDirecciones() {
     this.direccionService.obtenerPorUsuario(this.idUsuario).subscribe({
       next: (data) => {
-          this.direcciones = data;
+        this.direcciones = data;
         if (data.length > 0) {
           const principal = data.find(d => d.esPrincipal);
           this.idDireccionSeleccionada = principal?.idDireccion ?? data[0].idDireccion ?? null;
@@ -76,7 +76,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   cargarMetodosPago() {
-    // Temporal: crear métodos hardcoded mientras el servicio funciona
     this.metodosPago = [
       { idMetodoPago: 1, nombreMetodo: 'Tarjeta de Crédito/Débito', descripcion: 'Visa, Mastercard, American Express' },
       { idMetodoPago: 2, nombreMetodo: 'Yape', descripcion: 'Pago mediante Yape' },
@@ -128,27 +127,14 @@ export class CheckoutComponent implements OnInit {
     return subtotal + envio;
   }
 
-  validarCheckout(): boolean {
-    if (!this.carrito || this.carrito.detalles.length === 0) {
-      alert('El carrito está vacío');
-      return false;
-    }
-
-    if (this.tipoEntrega === 'ENVIO' && !this.idDireccionSeleccionada) {
-      alert('Selecciona una dirección de envío');
-      return false;
-    }
-
-    if (!this.idMetodoPagoSeleccionado) {
-      alert('Selecciona un método de pago');
-      return false;
-    }
-
+  formularioValido(): boolean {
+    if (!this.idMetodoPagoSeleccionado) return false;
+    if (this.tipoEntrega === 'ENVIO' && !this.idDireccionSeleccionada) return false;
     return true;
   }
 
   finalizarCompra() {
-    if (!this.validarCheckout()) return;
+    if (!this.formularioValido()) return;
 
     this.procesando = true;
 
@@ -160,8 +146,10 @@ export class CheckoutComponent implements OnInit {
       idMetodoPago: this.idMetodoPagoSeleccionado!,
       notas: this.notas || undefined
     };
+
     this.pedidoService.crearPedido(request).subscribe({
       next: (response) => {
+        this.procesando = false;
         const numeroPedido = response.data.numeroPedido;
         this.router.navigate(['/confirmacion', numeroPedido]);
       },

@@ -45,7 +45,7 @@ export class HomeComponent implements OnInit {
   cargarProductosDestacados() {
     this.productoService.obtenerDestacados().subscribe({
       next: (data) => {
-        this.productosDestacados = data.slice(0, 8); // Solo 8 productos
+        this.productosDestacados = data.slice(0, 8); 
         this.loading = false;
       },
       error: (error) => {

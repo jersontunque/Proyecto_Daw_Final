@@ -1,4 +1,4 @@
-<!-- src/app/pages/registro/registro.component.html -->
+
 <div class="registro-container">
   <h2>Crear Cuenta</h2>
   <form (ngSubmit)="registrar()" class="registro-form">
@@ -9,13 +9,63 @@
       <option value="Carnet Extranjeria">Carnet Extranjeria</option>
     </select>
 
-    <input [(ngModel)]="documentoIdentidad" name="documentoIdentidad" placeholder="Número de documento" required class="form-input" />
-    <input [(ngModel)]="nombres" name="nombres" placeholder="Nombres" required class="form-input" />
-    <input [(ngModel)]="apellidos" name="apellidos" placeholder="Apellidos" required class="form-input" />
+ <input 
+  [(ngModel)]="documentoIdentidad" 
+  name="documentoIdentidad" 
+  placeholder="Número de documento"
+  required
+  inputmode="numeric"
+  pattern="[0-9]+"
+  maxlength="8"
+  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+  class="form-input" 
+/>
+
+
+ <input 
+  [(ngModel)]="nombres" 
+  name="nombres"
+  placeholder="Nombres"
+  required
+  pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+"
+  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ ]/g, '')"
+  class="form-input" 
+/>
+
+<input 
+  [(ngModel)]="apellidos" 
+  name="apellidos"
+  placeholder="Apellidos"
+  required
+  pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+"
+  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ ]/g, '')"
+  class="form-input" 
+/>
+
+
     <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required class="form-input" />
     <input [(ngModel)]="password" name="password" type="password" placeholder="Contraseña" required class="form-input" />
-    <input [(ngModel)]="telefono" name="telefono" placeholder="Teléfono" class="form-input" />
-    <input [(ngModel)]="fechaNacimiento" name="fechaNacimiento" type="date" placeholder="Fecha de nacimiento" class="form-input" />
+   <input 
+  [(ngModel)]="telefono" 
+  name="telefono" 
+  placeholder="Teléfono"
+  required
+  inputmode="numeric"
+  pattern="[0-9]+"
+  maxlength="9"
+  oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+  class="form-input" 
+/>
+
+   <input 
+  [(ngModel)]="fechaNacimiento" 
+  name="fechaNacimiento" 
+  type="date"
+  [max]="maxFechaNacimiento"
+  required
+  class="form-input" 
+/>
+
 
     <button type="submit" class="btn-registrar">Crear Cuenta</button>
   </form>

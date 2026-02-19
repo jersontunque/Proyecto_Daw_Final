@@ -6,8 +6,8 @@ export interface Cita {
   numeroCita: string;
   sucursal: Sucursal;
   tipoServicio: TipoServicio;
-  fechaCita: string; // YYYY-MM-DD
-  horaCita: string;  // HH:mm:ss
+  fechaCita: string; 
+  horaCita: string;  
   estadoCita: 'PROGRAMADA' | 'CONFIRMADA' | 'COMPLETADA' | 'CANCELADA' | 'NO_ASISTIO';
   notas: string;
 }

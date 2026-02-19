@@ -22,7 +22,7 @@ export class CatalogoComponent implements OnInit {
   coloresDisponibles: string[] = [];
   formasDisponibles: string[] = [];
   
-  // Filtros
+
   filtros = {
     nombre: '',
     idCategoria: null as number | null,
@@ -34,13 +34,13 @@ export class CatalogoComponent implements OnInit {
     genero: ''
   };
   
-  // Paginación
+
   currentPage = 0;
   totalPages = 0;
   totalItems = 0;
   pageSize = 12;
   
-  // Ordenamiento
+
   sortBy = 'fechaCreacion';
   sortDir = 'desc';
   

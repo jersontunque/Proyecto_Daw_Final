@@ -4,22 +4,22 @@
   <form (ngSubmit)="guardarCambios()">
     <label>
       Nombres:
-      <input type="text" [(ngModel)]="usuarioEdit.nombres" name="nombres" required>
+      <input type="text" [(ngModel)]="usuarioEdit.nombres" name="nombres" required (keypress)="soloLetras($event)" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
     </label>
 
     <label>
       Apellidos:
-      <input type="text" [(ngModel)]="usuarioEdit.apellidos" name="apellidos" required>
+      <input type="text" [(ngModel)]="usuarioEdit.apellidos" name="apellidos" required (keypress)="soloLetras($event)" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
     </label>
 
     <label>
       Teléfono:
-      <input type="text" [(ngModel)]="usuarioEdit.telefono" name="telefono" required>
+      <input type="text" [(ngModel)]="usuarioEdit.telefono" name="telefono" required (keypress)="soloNumeros($event)" maxlength="9" pattern="[0-9]{9}">
     </label>
 
     <label>
       Fecha de Nacimiento:
-      <input type="date" [(ngModel)]="usuarioEdit.fechaNacimiento" name="fechaNacimiento" required>
+      <input type="date" [(ngModel)]="usuarioEdit.fechaNacimiento" name="fechaNacimiento" readonly disabled>
     </label>
 
     <div class="botones-editar">

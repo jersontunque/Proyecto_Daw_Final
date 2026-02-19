@@ -18,20 +18,20 @@ export class ClienteComponent implements OnInit {
   private http = inject(HttpClient);
 
   ngOnInit(): void {
-    // Cargar datos de usuario guardados en localStorage
+
     const usuarioGuardado = localStorage.getItem('usuario');
     if (usuarioGuardado) {
       this.usuario = JSON.parse(usuarioGuardado);
     }
 
-    // Validar token
+
     const token = localStorage.getItem('token');
     if (!token) {
       this.router.navigate(['/login']);
       return;
     }
 
-    // Obtener perfil desde el backend
+
     this.http.get<any>('http://localhost:8080/usuario/perfil', {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
@@ -47,7 +47,7 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-  // Función para navegar a la vista de edición
+
   editarPerfil() {
     localStorage.setItem('usuarioEdit', JSON.stringify(this.usuario));
     this.router.navigate(['/perfil/editar']);

@@ -6,5 +6,5 @@ export interface RegistroRequest {
   email: string;
   password: string;
   telefono: string;
-  fechaNacimiento: string; // Formato YYYY-MM-DD
+  fechaNacimiento: string; 
 }

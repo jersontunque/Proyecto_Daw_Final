@@ -3,7 +3,7 @@
 
   <div class="row">
     <div class="col-lg-8">
-      <!-- Tipo de Entrega -->
+
       <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
           <h5 class="mb-0"><i class="bi bi-truck me-2"></i>Tipo de Entrega</h5>
@@ -11,14 +11,14 @@
         <div class="card-body">
           <div class="form-check mb-2">
             <input class="form-check-input" type="radio" [(ngModel)]="tipoEntrega" 
-                   value="ENVIO" id="envio">
+                   value="ENVIO" id="envio" name="tipoEntrega">
             <label class="form-check-label" for="envio">
               <strong>Envío a domicilio</strong> - S/ {{costoEnvio.toFixed(2)}}
             </label>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="radio" [(ngModel)]="tipoEntrega" 
-                   value="RECOJO_EN_TIENDA" id="recojo">
+                   value="RECOJO_EN_TIENDA" id="recojo" name="tipoEntrega">
             <label class="form-check-label" for="recojo">
               <strong>Recojo en tienda</strong> - Gratis
             </label>
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <!-- Dirección de Envío -->
+
       <div class="card shadow-sm mb-4" *ngIf="tipoEntrega === 'ENVIO'">
         <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
           <h5 class="mb-0"><i class="bi bi-geo-alt me-2"></i>Dirección de Envío</h5>
@@ -35,7 +35,7 @@
           </button>
         </div>
         <div class="card-body">
-          <!-- Lista de direcciones -->
+
           <div *ngIf="!mostrarFormDireccion">
             <div *ngIf="direcciones.length === 0" class="text-center text-muted py-3">
               No tienes direcciones guardadas. Agrega una nueva.
@@ -45,6 +45,7 @@
               <input class="form-check-input" type="radio" 
                      [value]="dir.idDireccion" 
                      [(ngModel)]="idDireccionSeleccionada"
+                     name="direccionEnvio"
                      [id]="'dir-' + dir.idDireccion">
               <label class="form-check-label w-100" [for]="'dir-' + dir.idDireccion">
                 <div class="d-flex justify-content-between">
@@ -62,43 +63,49 @@
             </div>
           </div>
 
-          <!-- Formulario nueva dirección -->
+
           <div *ngIf="mostrarFormDireccion">
             <div class="row g-3">
               <div class="col-md-6">
                 <label class="form-label">Nombre completo *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.nombreDestinatario" required>
+                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.nombreDestinatario" 
+                       name="nombreDestinatario" required>
               </div>
               <div class="col-md-6">
                 <label class="form-label">Teléfono *</label>
-                <input type="tel" class="form-control" [(ngModel)]="nuevaDireccion.telefonoDestinatario" required>
+                <input type="tel" class="form-control" [(ngModel)]="nuevaDireccion.telefonoDestinatario" 
+                       name="telefonoDestinatario" required>
               </div>
               <div class="col-md-4">
                 <label class="form-label">Departamento *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.departamento" required>
+                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.departamento" 
+                       name="departamento" required>
               </div>
               <div class="col-md-4">
                 <label class="form-label">Provincia *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.provincia" required>
+                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.provincia" 
+                       name="provincia" required>
               </div>
               <div class="col-md-4">
                 <label class="form-label">Distrito *</label>
-                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.distrito" required>
+                <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.distrito" 
+                       name="distrito" required>
               </div>
               <div class="col-12">
                 <label class="form-label">Dirección *</label>
                 <input type="text" class="form-control" [(ngModel)]="nuevaDireccion.direccionLinea1" 
-                       placeholder="Ej: Av. Principal 123" required>
+                       name="direccionLinea1" placeholder="Ej: Av. Principal 123" required>
               </div>
               <div class="col-12">
                 <label class="form-label">Referencia</label>
                 <textarea class="form-control" [(ngModel)]="nuevaDireccion.referencia" 
-                          rows="2" placeholder="Ej: Frente al parque"></textarea>
+                          name="referencia" rows="2" placeholder="Ej: Frente al parque"></textarea>
               </div>
               <div class="col-12">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" 
-                         [(ngModel)]="nuevaDireccion.esPrincipal" id="principal">
+                         [(ngModel)]="nuevaDireccion.esPrincipal" 
+                         name="esPrincipal" id="principal">
                   <label class="form-check-label" for="principal">
                     Establecer como dirección principal
                   </label>
@@ -117,16 +124,19 @@
         </div>
       </div>
 
-      <!-- Método de Pago -->
       <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
           <h5 class="mb-0"><i class="bi bi-credit-card me-2"></i>Método de Pago</h5>
         </div>
         <div class="card-body">
+          <div *ngIf="metodosPago.length === 0" class="text-center text-muted py-3">
+            No hay métodos de pago disponibles.
+          </div>
           <div class="form-check mb-3" *ngFor="let metodo of metodosPago">
             <input class="form-check-input" type="radio" 
                    [value]="metodo.idMetodoPago" 
                    [(ngModel)]="idMetodoPagoSeleccionado"
+                   name="metodoPago"
                    [id]="'metodo-' + metodo.idMetodoPago">
             <label class="form-check-label" [for]="'metodo-' + metodo.idMetodoPago">
               <strong>{{metodo.nombreMetodo}}</strong>
@@ -136,24 +146,29 @@
         </div>
       </div>
 
-      <!-- Notas -->
       <div class="card shadow-sm mb-4">
         <div class="card-header bg-primary text-white">
           <h5 class="mb-0"><i class="bi bi-chat-text me-2"></i>Notas del Pedido</h5>
         </div>
         <div class="card-body">
-          <textarea class="form-control" rows="3" [(ngModel)]="notas"
+          <textarea class="form-control" rows="3" [(ngModel)]="notas" name="notas"
                     placeholder="¿Alguna indicación especial? (opcional)"></textarea>
         </div>
       </div>
     </div>
 
-    <!-- Resumen del Pedido -->
     <div class="col-lg-4">
       <div class="card shadow-sm sticky-top" style="top: 80px;">
         <div class="card-header bg-success text-white">
           <h5 class="mb-0">Resumen del Pedido</h5>
         </div>
+
+        <div *ngIf="!carrito" class="card-body text-center text-muted py-4">
+          <i class="bi bi-cart-x fs-1"></i>
+          <p class="mt-2">No hay productos en el carrito.</p>
+          <a routerLink="/catalogo" class="btn btn-primary btn-sm">Ver productos</a>
+        </div>
+
         <div class="card-body" *ngIf="carrito">
           <div class="mb-3">
             <h6>Productos ({{carrito.totalItems}})</h6>
@@ -182,13 +197,25 @@
             <strong class="fs-5">Total</strong>
             <strong class="fs-5 text-success">S/ {{getTotal().toFixed(2)}}</strong>
           </div>
+
+
+          <div class="alert alert-warning small py-2 mb-2" 
+               *ngIf="tipoEntrega === 'ENVIO' && !idDireccionSeleccionada && !mostrarFormDireccion">
+            <i class="bi bi-exclamation-triangle me-1"></i>Selecciona una dirección de envío.
+          </div>
+          <div class="alert alert-warning small py-2 mb-2" 
+               *ngIf="!idMetodoPagoSeleccionado">
+            <i class="bi bi-exclamation-triangle me-1"></i>Selecciona un método de pago.
+          </div>
           
           <button class="btn btn-success btn-lg w-100" 
                   (click)="finalizarCompra()" 
-                  [disabled]="procesando">
+                  [disabled]="procesando || !formularioValido()">
             <i class="bi bi-check-circle me-2"></i>
             <span *ngIf="!procesando">Confirmar Pedido</span>
-            <span *ngIf="procesando">Procesando...</span>
+            <span *ngIf="procesando">
+              <span class="spinner-border spinner-border-sm me-2"></span>Procesando...
+            </span>
           </button>
           
           <a routerLink="/carrito" class="btn btn-outline-secondary w-100 mt-2">

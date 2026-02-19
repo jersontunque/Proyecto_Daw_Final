@@ -22,8 +22,8 @@ export class AgendarCitaComponent implements OnInit {
   loadingHorarios = false;
   minDate: string = '';
 
-  // SIMULACIÓN DE ID DE USUARIO (Esto debería venir de tu AuthService)
-  userId: number = 1; // Usamos 2 como ejemplo, o el ID del admin (1)
+
+  userId: number = 1; 
 
   constructor(
     private fb: FormBuilder,
@@ -38,14 +38,14 @@ export class AgendarCitaComponent implements OnInit {
       notas: ['']
     });
 
-    // Validar que no seleccione fechas pasadas en el HTML
+
     this.minDate = new Date().toISOString().split('T')[0];
   }
 
   ngOnInit(): void {
     this.cargarDatosIniciales();
     
-    // Escuchar cambios en fecha o sucursal para buscar horarios
+
     this.citaForm.get('fecha')?.valueChanges.subscribe(() => this.buscarHorarios());
     this.citaForm.get('sucursal')?.valueChanges.subscribe(() => this.buscarHorarios());
   }

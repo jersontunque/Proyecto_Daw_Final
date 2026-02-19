@@ -25,11 +25,11 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Obtener el id del usuario desde el token
+
     this.idUsuario = this.authService.obtenerIdUsuarioDelToken();
 
     if (this.idUsuario) {
-      // Obtener carrito del usuario
+
       this.carritoService.obtenerCarrito(this.idUsuario).subscribe({
         next: (carrito) => {
           this.totalItems = carrito?.totalItems || 0;
@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
       });
     }
 
-    // Suscribirse al observable para actualizar totalItems dinámicamente
+
     this.carritoService.carrito$.subscribe(carrito => {
       this.totalItems = carrito?.totalItems || 0;
     });

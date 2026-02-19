@@ -15,7 +15,7 @@ import { Carrito, DetalleCarrito } from '../../model/carrito';
 export class CarritoComponent implements OnInit {
   carrito: Carrito | null = null;
   loading = true;
-  idUsuario = 1; // Temporal
+  idUsuario = 1;
 
   constructor(
     private carritoService: CarritoService,
